@@ -106,6 +106,7 @@ class ToggleSwitch extends React.Component {
           onScrollBeginDrag={this.onDragStart}
           scrollEnabled={!disabled}
           scrollsToTop={false}
+          keyboardShouldPersistTaps="always"
           contentOffset={{x: this.initailContentOffset, y: 0}}
           style={{ width: this.viewPortWidth }}
         >
