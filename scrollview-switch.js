@@ -75,10 +75,12 @@ class ToggleSwitch extends React.Component {
   }
 
   render() {
-    const { text: { on = 'ON', off = 'OFF', activeTextColor, inactiveTextColor },
-     color: { active, inactive, indicator, activeBorder, inactiveBorder }, 
-     textStyle = {},
-     disabled = false
+    const {
+      text: { on = 'ON', off = 'OFF', activeTextColor, inactiveTextColor },
+      icon: { on: iconOn = undefined, off: iconOff = undefined },
+      color: { active, inactive, indicator, activeBorder, inactiveBorder }, 
+      textStyle = {},
+      disabled = false
     } = this.props;
     const { isActive } = this.state;
     
@@ -154,14 +156,24 @@ class ToggleSwitch extends React.Component {
                 <View
                   style={[
                     styles.indicator,
-                    { backgroundColor: indicator, 
+                    { backgroundColor: indicator,
                       borderColor: isActive ? active : inactive,
                       width: this.props.radius * 2,
                       height: this.props.radius * 2,
-                      borderRadius: this.props.radius
+                      borderRadius: this.props.radius,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center'
                     }
                   ]}
-                />
+                >
+                  {isActive && iconOn && (
+                    iconOn
+                  )}
+                  {!isActive && iconOff && (
+                    iconOff
+                  )}
+                </View>
               </View>
             </TouchableWithoutFeedback>
             <View
@@ -231,5 +243,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   }
 });
+
+ToggleSwitch.defaultProps = {
+  icon: {
+    on: undefined,
+    off: undefined
+  }
+}
 
 export default ToggleSwitch;
